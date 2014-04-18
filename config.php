@@ -6,7 +6,7 @@ class Config{
 	 'password' => 'rasberry',
 	 'dbname' => 'weather'),
 
-	'local' => array('host' => 'localhost',
+	'local' => array('host' => '127.0.0.1',
 	 'user' => 'root',
 	 'password' => 'root',
 	 'dbname' => 'weather')
