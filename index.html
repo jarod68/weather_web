@@ -26,9 +26,9 @@
 
   $(function() {
     $( "#datepicker" ).datepicker({
+      maxDate:0,
       altField: "#actualDate",
       onSelect: function (date) {
-
         var dateArray = date.split("/");
         var jsdate= new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
         loadChart(jsdate);
@@ -89,8 +89,8 @@
         <h1>The weather station data</h1>
       </div>
       <div class="row">
-       <div id="dayTemp" style="max-width:600px;height: 200px;" class="col-md-6 jumbotron"></div>
-       <div class="col-md-6" > <p>Date: <input type="text" id="datepicker"></p> </div>
+       <div id="dayTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron"></div>
+       <div class="col-md-4" > <p>Date: <input type="text" id="datepicker"></p> </div>
      </div>
      <!--<div id="meanTemp" style="max-width:600px;height: 200px;" class="col-md-6"></div>-->
 		<!--<div class="row">	
