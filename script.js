@@ -7,7 +7,6 @@
 	}
 
 	function computeDateForParameter(date){
-
 		return date.getUTCFullYear()+"/"+ (date.getUTCMonth()+1) +"/" + date.getUTCDate() +" " + date.getUTCHours() +":" + date.getUTCMinutes() +":"+date.getUTCSeconds();
 	}
 
@@ -33,6 +32,7 @@
 				result = arr;
 			}
 		});
+		
 		return result;
 
 	}
@@ -69,10 +69,15 @@
 	// "timestamp":"2014-04-01 06:00:03","indoor_temp":23,"indoor_humidity":59,"indoor_pressure":999.8,"
 
 
-	$(function () {
+
+	function loadChart(date){
+
+		var data = loadDay(date);
+
+
 		$("#dayTemp").dxChart({
 
-			dataSource: today,
+			dataSource: data,
 			type: 'stackedLine',
 			commonSeriesSettings: {
 				argumentField: 'timestamp'
@@ -117,12 +122,22 @@
 			}
 
 		});
-	});
+
+	}
+
+
 
 	$(function () {
+		loadChart(new Date());
+	});
+
+/*
+	function loadChart(date){
+
+		var data = loadDay(date);
 		$("#dayPress").dxChart({
 
-			dataSource: today,
+			dataSource: data,
 			type: 'stackedLine',
 			commonSeriesSettings: {
 				argumentField: 'timestamp'
@@ -162,9 +177,10 @@
 			}
 
 		});
-	});
+}*/
 
 
+/*
 	$(function () {
 		$("#dayHum").dxChart({
 
@@ -208,8 +224,8 @@
 			}
 
 		});
-	});
-
+});*/
+/*
 	$(function () {
 		$("#meanTemp").dxChart({
 
@@ -244,4 +260,4 @@
 				}
 			}
 		});
-	});
+	});*/
