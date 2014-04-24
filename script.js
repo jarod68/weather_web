@@ -70,7 +70,7 @@
 
 
 
-	function loadChart(date){
+	function loadTempChart(date){
 
 		var data = loadDay(date);
 
@@ -125,15 +125,54 @@
 
 	}
 
+	function loadHumChart(date){
+		var data = loadDay(date);
+		$("#dayHum").dxChart({
+
+			dataSource: data,
+			type: 'stackedLine',
+			commonSeriesSettings: {
+				argumentField: 'timestamp'
+			},
+			scale: {
+				valueType: "datetime"
+			},
+			series: [{
+				name: 'indoor_humidity',
+				valueField: 'indoor_humidity', 
+				color: 'violet', 
+				point: {
+					size: '0.5'
+				}
+			}], valueAxis:{
+				label: {
+					customizeText: function () {
+						return this.valueText + '%';
+					}
+				}
+			},
+			argumentAxis: {
+				argumentType: 'datetime',
+				label: {
+					format: 'HH:mm'
+				},
+				axisDivisionFactor: 50,
+				grid: {
+					visible: true
+				}
+			},  tooltip: {
+				enabled: true,
+				customizeText: function (label) {
+
+					return  this.valueText + '%, ' + computeDateForTooltips(new Date(this.argumentText)) ;
+				}
+			}
+
+		});
+	}
 
 
-	$(function () {
-		loadChart(new Date());
-	});
-
-/*
-	function loadChart(date){
-
+	function loadPressChart(date){
 		var data = loadDay(date);
 		$("#dayPress").dxChart({
 
@@ -146,8 +185,8 @@
 				valueType: "datetime"
 			},
 			series: [{
-				name: 'indoor_pressure',
-				valueField: 'indoor_pressure', 
+				name: 'indoor_humidity',
+				valueField: 'indoor_humidity', 
 				color: 'orange', 
 				point: {
 					size: '0.5'
@@ -177,6 +216,19 @@
 			}
 
 		});
+	}
+
+
+	$(function () {
+		loadTempChart(new Date());
+		loadHumChart(new Date());
+		loadPressChart(new Date());
+	});
+
+/*
+	function loadChart(date){
+
+		
 }*/
 
 
