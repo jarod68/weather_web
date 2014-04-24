@@ -60,20 +60,17 @@
 
 	}
 
-	var today = loadDay(new Date());
+	//var today = loadDay(new Date());
 
-	var yesterday = new Date();
-	yesterday.setDate(yesterday.getDate() - 31);
+	//var yesterday = new Date();
+	//yesterday.setDate(yesterday.getDate() - 31);
 
-	var month = loadMean(yesterday, new Date());
+	//var month = loadMean(yesterday, new Date());
 	// "timestamp":"2014-04-01 06:00:03","indoor_temp":23,"indoor_humidity":59,"indoor_pressure":999.8,"
 
 
 
-	function loadTempChart(date){
-
-		var data = loadDay(date);
-
+	function loadTempChart(data){
 
 		$("#dayTemp").dxChart({
 
@@ -125,8 +122,8 @@
 
 	}
 
-	function loadHumChart(date){
-		var data = loadDay(date);
+	function loadHumChart(data){
+		
 		$("#dayHum").dxChart({
 
 			dataSource: data,
@@ -172,8 +169,8 @@
 	}
 
 
-	function loadPressChart(date){
-		var data = loadDay(date);
+	function loadPressChart(data){
+		
 		$("#dayPress").dxChart({
 
 			dataSource: data,
@@ -185,8 +182,8 @@
 				valueType: "datetime"
 			},
 			series: [{
-				name: 'indoor_humidity',
-				valueField: 'indoor_humidity', 
+				name: 'indoor_pressure',
+				valueField: 'indoor_pressure', 
 				color: 'orange', 
 				point: {
 					size: '0.5'
@@ -219,17 +216,64 @@
 	}
 
 
+	function loadMonthTempChart(data){
+		
+		$("#meanMonthTemp").dxChart({
+
+			dataSource: data,
+			type: 'bar',
+			commonSeriesSettings: {
+				argumentField: 'day'
+			},
+			scale: {
+				valueType: "datetime"
+			},
+
+			series: [{
+				name: 'outdoor_temperature_mean',
+				valueField: 'outdoor_temperature_mean',
+				type:'bar'
+			}], 
+			argumentAxis: {
+				argumentType: 'datetime',
+				label: {
+					format: 'dd/MM/yy'
+				},
+				axisDivisionFactor: 50,
+				grid: {
+					visible: true
+				}
+			},  tooltip: {
+				enabled: true,
+				customizeText: function (label) {
+					var timestamp = new Date(this.argumentText);
+					return  this.valueText + '&#176C, ' + timestamp.getUTCDate() + "/" + (timestamp.getUTCMonth()+1) + "/" + timestamp.getUTCFullYear() ;
+				}
+			}
+		});
+	}
+
 	$(function () {
-		loadTempChart(new Date());
-		loadHumChart(new Date());
-		loadPressChart(new Date());
+		var today = loadDay(new Date());
+
+		loadTempChart(today);
+		loadHumChart(today);
+		loadPressChart(today);
+
+		var oneMonthAgo = new Date();
+		oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
+		console.log(oneMonthAgo);
+		var month = loadMean(oneMonthAgo, new Date());
+		console.log(month);
+		loadMonthTempChart(month);
+
 	});
 
 /*
 	function loadChart(date){
 
 		
-}*/
+	}*/
 
 
 /*

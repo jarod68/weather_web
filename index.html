@@ -31,9 +31,15 @@
       onSelect: function (date) {
         var dateArray = date.split("/");
         var jsdate= new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
-        loadTempChart(jsdate);
-        loadHumChart(jsdate);
-          (jsdate);
+        var data = loadDay(jsdate);
+        loadTempChart(data);
+        loadHumChart(data);
+        loadPressChart(data);
+
+        var oneMonthAgo = new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
+        oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
+        var month = loadMean(oneMonthAgo, jsdate);
+        loadMonthTempChart(month);
 
       }
     });
@@ -92,25 +98,28 @@
       </div>
       <div class="row">
         <h3>Temperature</h3>
-       <div id="dayTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron"></div>
-       <div class="col-md-4" > <p>Date: <input type="text" id="datepicker"></p> </div>
-     </div>
-     <div class="row">
-      <h3>Humidity  </h3  >
-        <div id="dayHum" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
-    </div>
-    <div class="row">
-      <h3>Pression  </h3>
-        <div id="dayPress" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
-    </div>
-    
-     <!--<div id="meanTemp" style="max-width:600px;height: 200px;" class="col-md-6"></div>-->
-		
-		
-	</div>
-	
-	
-	
-	
-</body>
-</html>
+        <div id="dayTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron"></div>
+        <div class="col-md-4" > <p>Date: <input type="text" id="datepicker"></p> </div>
+      </div>
+      <div class="row">
+        <h3>Humidity  </h3  >
+          <div id="dayHum" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
+        </div>
+        <div class="row">
+          <h3>Pression  </h3>
+          <div id="dayPress" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
+        </div>
+        <div class="row">
+          <h3>Pression  </h3>
+          <div id="meanMonthTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
+        </div>
+        <!--<div id="meanTemp" style="max-width:600px;height: 200px;" class="col-md-6"></div>-->
+        
+        
+      </div>
+      
+      
+      
+      
+    </body>
+    </html>
