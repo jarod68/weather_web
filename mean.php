@@ -5,7 +5,9 @@ include_once "configured_weather_db.php";
 $db = configured_weather_db::getInstance();
 
 if (isset($_GET["from"]) && isset($_GET["to"])){
-
+	
+	$timeZone = 'GMT';  // +2 hours 
+    date_default_timezone_set($timeZone); 
 
 	$begin = new DateTime( $_GET["from"] );
 	$end = new DateTime( $_GET["to"]);
