@@ -30,15 +30,18 @@
       altField: "#actualDate",
       onSelect: function (date) {
         var dateArray = date.split("/");
-        var jsdate= new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
-        var data = loadDay(jsdate);
+
+        var today = new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
+
+        var oneMonthAgo = new  Date(today.getTime());
+        oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
+        
+        var data = loadDay(today);
         loadTempChart(data);
         loadHumChart(data);
         loadPressChart(data);
 
-        var oneMonthAgo = new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
-        oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
-        var month = loadMean(oneMonthAgo, jsdate);
+        var month = loadMean(oneMonthAgo, today);
         loadMonthTempChart(month);
         loadMonthHumChart(month);
         loadMonthPressChart(month);
@@ -118,18 +121,11 @@
           <h3>Pressure month </h3>
           <div id="meanMonthPress" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
         </div>
-
         <div class="row">
           <h3>Humidity month  </h3>
           <div id="meanMonthHum" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
         </div>
-        <!--<div id="meanTemp" style="max-width:600px;height: 200px;" class="col-md-6"></div>-->
-
-
       </div>
-
-      
-
 
     </body>
     </html>
