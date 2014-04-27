@@ -34,7 +34,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Weather station</a>
+        <a class="navbar-brand" href="javascript:displayGauge()">Weather station</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
@@ -55,6 +55,13 @@
         <h1>The weather station data</h1>
       </div> -->
 
+      <div class="row" id="gaugeContainer">
+        <h3>Gauges</h3>
+        <div id="gaugeOutTemp" style="max-width:400px;height: 300px;margin:20px;" class="col-md-8 jumbotron"></div>
+        <div id="gaugeInTemp" style="max-width:400px;height: 300px;margin:20px;" class="col-md-8 jumbotron"></div>
+        <div id="gaugeHum" style="max-width:400px;height: 300px;margin:20px;" class="col-md-8 jumbotron"></div>
+        <div id="gaugePress" style="max-width:400px;height: 300px;margin:20px;" class="col-md-8 jumbotron"></div>
+      </div>
       <div class="row" id="temperatureContainer">
         <h3>Temperature</h3>
         <div id="dayTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron"></div>

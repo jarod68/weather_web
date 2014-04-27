@@ -18,6 +18,31 @@ function computeDateForTooltips(date){
 	return date.getHours() +":" + date.getMinutes();
 }
 
+function loadNow(){
+
+	var result = null;
+	$.ajax({
+		'async': false,
+		'global': false,
+		'url': "./now.php",
+		'dataType': "json",
+		'success': function (json) {
+			
+			var arr = [];
+			arr ['timestamp'] = toDate(json[0].timestamp);
+			arr ['outdoor_temperature'] =json[0].outdoor_temperature;
+			arr ['indoor_temp'] =json[0].indoor_temp;
+			arr [ 'indoor_humidity'] =json[0].indoor_humidity;
+			arr [ 'indoor_pressure'] =json[0].indoor_pressure ;
+			
+			result = arr;
+		}
+	});
+
+	return result;
+
+}
+
 function loadDay(day){
 
 	var result = null;
@@ -318,6 +343,121 @@ function loadMonthPressChart(data){
 		}
 	});
 }
+
+function loadNowOutTempGauge(value){
+
+	$('#gaugeOutTemp').dxCircularGauge({
+		scale: {
+			startValue: -20,
+			endValue: 50,
+			majorTick: {
+				tickInterval: 5
+			}
+		},
+		rangeContainer: {
+			palette: 'pastel',
+			ranges: [
+			{ startValue: -20, endValue: 0 },
+			{ startValue: 0, endValue: 22 },
+			{ startValue: 22, endValue: 50 },
+			]
+		},
+		title: {
+			text: 'Outdoor temperature '+value+ '&#176C',
+			font: { size: 14 }
+		},
+		value: value
+	});
+}
+
+function loadNowInTempGauge(value){
+
+	$('#gaugeInTemp').dxCircularGauge({
+		scale: {
+			startValue: -20,
+			endValue: 50,
+			majorTick: {
+				tickInterval: 5
+			}
+		},
+		rangeContainer: {
+			palette: 'pastel',
+			ranges: [
+			{ startValue: -20, endValue: 0 },
+			{ startValue: 0, endValue: 22 },
+			{ startValue: 22, endValue: 50 },
+			]
+		},
+		title: {
+			text: 'Indoor temperature '+value+ '&#176C',
+			font: { size: 14 }
+		},
+		value: value
+	});
+}
+
+function loadNowHumGauge(value){
+
+	$('#gaugeHum').dxCircularGauge({
+		scale: {
+			startValue: 0,
+			endValue: 100,
+			majorTick: {
+				tickInterval: 10
+			}
+		},
+		rangeContainer: {
+			palette: 'pastel',
+			ranges: [
+			{ startValue: 0, endValue: 20 },
+			{ startValue: 20, endValue: 45 },
+			{ startValue: 45, endValue: 100 },
+			]
+		},
+		title: {
+			text: 'Humidity '+value+ '%',
+			font: { size: 14 }
+		},
+		value: value
+	});
+}
+
+function loadNowPressGauge(value){
+
+	$('#gaugePress').dxCircularGauge({
+		scale: {
+			startValue: 700,
+			endValue: 1050,
+			majorTick: {
+				tickInterval: 20
+			}
+		},
+		rangeContainer: {
+			palette: 'pastel',
+			ranges: [
+			{ startValue: 700, endValue: 900 },
+			{ startValue: 900, endValue: 1020 },
+			{ startValue: 1020, endValue: 1050 },
+			]
+		},
+		title: {
+			text: 'Pressure '+value+ 'hPa',
+			font: { size: 14 }
+		},
+		value: value
+	});
+}
+
+
+function loadGauges(){
+
+	var now = loadNow();
+	loadNowOutTempGauge(now['outdoor_temperature']);
+	loadNowInTempGauge(now['indoor_temp']);
+	loadNowHumGauge(now['indoor_humidity']);
+	loadNowPressGauge(now['indoor_pressure']);
+}
+
 $(function () {
 	var today = loadDay(new Date());
 
@@ -331,4 +471,7 @@ $(function () {
 	loadMonthTempChart(month);
 	loadMonthHumChart(month);
 	loadMonthPressChart(month);
+
+	loadGauges();
+
 });
