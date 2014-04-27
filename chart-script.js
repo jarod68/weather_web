@@ -44,7 +44,6 @@ function loadNow(){
 }
 
 function loadDay(day){
-	console.log(computeDateForParameter(day));
 	var result = null;
 	$.ajax({
 		'async': false,
