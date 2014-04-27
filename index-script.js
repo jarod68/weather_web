@@ -96,5 +96,5 @@ function displayPress() {
 }
 
 $(function() {
-  displayTemp();
+      displayTemp();
 });
