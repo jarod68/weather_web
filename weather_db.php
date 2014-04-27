@@ -116,5 +116,11 @@ class weather_db{
 		
 		return $json;
 	}
+	public function lastValues (){
+
+		$request = 'SELECT id, indoor_temp, indoor_humidity, indoor_pressure, outdoor_temperature, timestamp FROM record WHERE id=(SELECT id FROM record ORDER BY id DESC LIMIT 1)';
+
+		return self::retrieveValues_request( array('request' => $request  ));
+	}
 }
 ?>
