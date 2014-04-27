@@ -10,7 +10,7 @@ function toDate(date){
 }
 
 function computeDateForParameter(date){
-	return date.getUTCFullYear()+"/"+ (date.getUTCMonth()+1) +"/" + date.getUTCDate() +" " + date.getUTCHours() +":" + date.getUTCMinutes() +":"+date.getUTCSeconds();
+	return date.getUTCFullYear()+"/"+ (date.getUTCMonth()+1) +"/" + date.getDate() +" " + date.getUTCHours() +":" + date.getUTCMinutes() +":"+date.getUTCSeconds();
 }
 
 function computeDateForTooltips(date){
@@ -44,7 +44,7 @@ function loadNow(){
 }
 
 function loadDay(day){
-
+	console.log(computeDateForParameter(day));
 	var result = null;
 	$.ajax({
 		'async': false,

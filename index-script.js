@@ -1,6 +1,6 @@
  var day;
  var month;
- 
+
  $(function() {
 
   $( "#datepicker" ).datepicker({
@@ -10,10 +10,10 @@
       var dateArray = date.split("/");
 
       var today = new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
-
+console.log(today);
       var oneMonthAgo = new  Date(today.getTime());
       oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
-      
+
       day = loadDay(today);
       loadTempChart(day);
       loadHumChart(day);
