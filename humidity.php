@@ -7,8 +7,8 @@
 <body>
 
   <?php
-    include_once "toolbar.php";
-    toolbar::getInstance()->write("hum");
+  include_once "toolbar.php";
+  toolbar::getInstance()->write("hum");
   ?>
   
 
