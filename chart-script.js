@@ -367,7 +367,8 @@ function loadNowOutTempGauge(value){
 			text: 'Outdoor temperature '+value+ '&#176C',
 			font: { size: 14 }
 		},
-		value: value
+		value: value,
+		subvalues: value
 	});
 }
 
@@ -393,7 +394,8 @@ function loadNowInTempGauge(value){
 			text: 'Indoor temperature '+value+ '&#176C',
 			font: { size: 14 }
 		},
-		value: value
+		value: value,
+		subvalues: value
 	});
 }
 
@@ -419,7 +421,8 @@ function loadNowHumGauge(value){
 			text: 'Humidity '+value+ '%',
 			font: { size: 14 }
 		},
-		value: value
+		value: value,
+		subvalues: value
 	});
 }
 
@@ -445,7 +448,8 @@ function loadNowPressGauge(value){
 			text: 'Pressure '+value+ 'hPa',
 			font: { size: 14 }
 		},
-		value: value
+		value: value,
+		subvalues: value
 	});
 }
 
