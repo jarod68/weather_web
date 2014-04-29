@@ -8,10 +8,10 @@
 
   <?php
     include_once "toolbar.php";
-    toolbar::getInstance()->write("press");
+    toolbar::getInstance()->write("hum");
   ?>
   
-  
+
   <div id="core" class="container">
     <div class="row" id="thumidityContainer">
       <h3>Humidity</h3  >
