@@ -1,7 +1,27 @@
- var day;
- var month;
+function setDateCookie(date){
 
- $(function() {
+  var stringDate = date.getUTCFullYear()+"/"+ date.getUTCMonth() +"/" + date.getDate();
+
+  $.cookie('selectedDay', stringDate);
+}
+
+function getDateCookie(){
+
+  var retrieved = $.cookie('selectedDay');
+  
+  if(retrieved == null){
+    var now = new Date();
+    setDateCookie(now);
+    return now;
+  }
+
+
+  var dateArray = retrieved.split("/");
+
+  return new  Date(dateArray[0], dateArray[1], dateArray[2], 0, 0, 0, 0);
+}
+
+$(function() {
 
   $( "#datepicker" ).datepicker({
     maxDate:0,
@@ -14,87 +34,18 @@
       var oneMonthAgo = new  Date(today.getTime());
       oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
 
-      day = loadDay(today);
+      var day = loadDay(today);
       loadTempChart(day);
       loadHumChart(day);
       loadPressChart(day);
 
-      month = loadMean(oneMonthAgo, today);
+      var month = loadMean(oneMonthAgo, today);
       loadMonthTempChart(month);
       loadMonthHumChart(month);
       loadMonthPressChart(month);
+
+      setDateCookie(today);
     }
   });
-  $( "#datepicker" ).datepicker('setDate', new Date());
-});
-
- function displayGauge() {
-  $( "#temperatureContainer" ).hide();
-  $( "#thumidityContainer" ).hide();
-  $( "#pressureContainer" ).hide();
-  $( "#monthTemperatureContainer" ).hide();
-  $( "#monthPressureContainer" ).hide();
-  $( "#monthHumidityContainer" ).hide();
-  $( "#gaugeContainer" ).show();
-
-  $( "#tempNav" ).attr({class: '' });
-  $( "#pressNav" ).attr({class: '' });
-  $( "#humNav" ).attr({class: '' });
-
-  loadGauges();
-}
-
-function displayTemp() {
-  $( "#temperatureContainer" ).show();
-  $( "#thumidityContainer" ).hide();
-  $( "#pressureContainer" ).hide();
-  $( "#monthTemperatureContainer" ).show();
-  $( "#monthPressureContainer" ).hide();
-  $( "#monthHumidityContainer" ).hide();
-  $( "#gaugeContainer" ).hide();
-
-  $( "#tempNav" ).attr({class: 'active' });
-  $( "#pressNav" ).attr({class: '' });
-  $( "#humNav" ).attr({class: '' });
-
-  loadTempChart(day);
-  loadMonthTempChart(month);
-}
-
-function displayHum() {
- $( "#temperatureContainer" ).hide();
- $( "#thumidityContainer" ).show();
- $( "#pressureContainer" ).hide();
- $( "#monthTemperatureContainer" ).hide();
- $( "#monthPressureContainer" ).hide();
- $( "#monthHumidityContainer" ).show();
- $( "#gaugeContainer" ).hide();
-
- $( "#tempNav" ).attr({class: '' });
- $( "#pressNav" ).attr({class: '' });
- $( "#humNav" ).attr({class: 'active' });
-
- loadHumChart(day);
- loadMonthHumChart(month);
-}
-
-function displayPress() {
-  $( "#temperatureContainer" ).hide();
-  $( "#thumidityContainer" ).hide();
-  $( "#pressureContainer" ).show();
-  $( "#monthTemperatureContainer" ).hide();
-  $( "#monthPressureContainer" ).show();
-  $( "#monthHumidityContainer" ).hide();
-  $( "#gaugeContainer" ).hide();
-
-  $( "#tempNav" ).attr({class: '' });
-  $( "#pressNav" ).attr({class: 'active' });
-  $( "#humNav" ).attr({class: '' });
-
-  loadPressChart(day);
-  loadMonthPressChart(month);
-}
-
-$(function() {
-      displayTemp();
+  $( "#datepicker" ).datepicker('setDate', getDateCookie());
 });

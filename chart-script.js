@@ -458,15 +458,16 @@ function loadGauges(){
 }
 
 $(function () {
-	var today = loadDay(new Date());
+	var date = getDateCookie();
+	var today = loadDay(date);
 
 	loadTempChart(today);
 	loadHumChart(today);
 	loadPressChart(today);
 
-	var oneMonthAgo = new Date();
+	var oneMonthAgo = getDateCookie();
 	oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
-	var month = loadMean(oneMonthAgo, new Date());
+	var month = loadMean(oneMonthAgo, date);
 	loadMonthTempChart(month);
 	loadMonthHumChart(month);
 	loadMonthPressChart(month);
