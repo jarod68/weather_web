@@ -153,7 +153,7 @@ function loadHumChart(data){
 		series: [{
 			name: 'indoor_humidity',
 			valueField: 'indoor_humidity', 
-			color: 'violet', 
+			color: '#3399FF',
 			point: {
 				size: '0.5'
 			}
@@ -285,7 +285,8 @@ function loadMonthHumChart(data){
 		series: [{
 			name: 'indoor_humidity_mean',
 			valueField: 'indoor_humidity_mean',
-			type:'bar'
+			type:'bar',
+			color: '#3399FF'
 		}], 
 		argumentAxis: {
 			argumentType: 'datetime',
@@ -322,7 +323,8 @@ function loadMonthPressChart(data){
 		series: [{
 			name: 'indoor_pressure_mean',
 			valueField: 'indoor_pressure_mean',
-			type:'bar'
+			type:'bar',
+			color: 'orange'
 		}], 
 		argumentAxis: {
 			argumentType: 'datetime',
