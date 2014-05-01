@@ -1,6 +1,6 @@
 function setDateCookie(date){
 
-  var stringDate = date.getUTCFullYear()+"/"+ date.getUTCMonth() +"/" + date.getDate();
+  var stringDate = date.getUTCFullYear()+"-"+ date.getMonth()+"-" + date.getDate();
 
   $.cookie('selectedDay', stringDate);
 }
@@ -16,7 +16,7 @@ function getDateCookie(){
   }
 
 
-  var dateArray = retrieved.split("/");
+  var dateArray = retrieved.split("-");
 
   return new  Date(dateArray[0], dateArray[1], dateArray[2], 0, 0, 0, 0);
 }
@@ -30,7 +30,7 @@ $(function() {
       var dateArray = date.split("/");
 
       var today = new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
-
+      console.log("select "+today);
       var oneMonthAgo = new  Date(today.getTime());
       oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
 
