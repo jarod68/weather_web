@@ -15,7 +15,7 @@ function computeDateForParameter(date){
 
 function computeDateForTooltips(date){
 
-	return date.getHours() +":" + date.getMinutes();
+	return ('0' + date.getHours()).slice(-2) +":" + ('0' + date.getMinutes()).slice(-2);
 }
 
 function loadNow(){
