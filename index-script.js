@@ -30,7 +30,6 @@ $(function() {
       var dateArray = date.split("/");
 
       var today = new  Date(dateArray[2], dateArray[0]-1, dateArray[1], 0, 0, 0, 0);
-      console.log("select "+today);
       var oneMonthAgo = new  Date(today.getTime());
       oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
 

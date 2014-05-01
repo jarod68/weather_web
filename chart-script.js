@@ -66,7 +66,6 @@ function loadDay(day){
 
 function loadMean(from, to){
 
-console.log("from ="+computeDateForParameter(from));console.log("to ="+computeDateForParameter(to));
 	var result = null;
 	$.ajax({
 		'async': false,
@@ -466,7 +465,6 @@ function loadGauges(){
 
 $(function () {
 	var date = getDateCookie();
-	console.log("loadd "+date);
 	var today = loadDay(date);
 
 	loadTempChart(today);
