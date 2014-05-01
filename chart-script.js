@@ -10,7 +10,7 @@ function toDate(date){
 }
 
 function computeDateForParameter(date){
-	return date.getUTCFullYear()+"/"+ (date.getUTCMonth()+1) +"/" + date.getDate() +" " + date.getUTCHours() +":" + date.getUTCMinutes() +":"+date.getUTCSeconds();
+	return date.getUTCFullYear()+"/"+ (date.getMonth()+1) +"/" + date.getDate() +" " + date.getUTCHours() +":" + date.getUTCMinutes() +":"+date.getUTCSeconds();
 }
 
 function computeDateForTooltips(date){
@@ -66,6 +66,7 @@ function loadDay(day){
 
 function loadMean(from, to){
 
+console.log("from ="+computeDateForParameter(from));console.log("to ="+computeDateForParameter(to));
 	var result = null;
 	$.ajax({
 		'async': false,
@@ -301,7 +302,7 @@ function loadMonthHumChart(data){
 			enabled: true,
 			customizeText: function (label) {
 				var timestamp = new Date(this.argumentText);
-				return  this.valueText + '&#176C, ' + timestamp.getUTCDate() + "/" + (timestamp.getUTCMonth()+1) + "/" + timestamp.getUTCFullYear() ;
+				return  this.valueText + '%, ' + timestamp.getUTCDate() + "/" + (timestamp.getUTCMonth()+1) + "/" + timestamp.getUTCFullYear() ;
 			}
 		}
 	});
@@ -339,7 +340,7 @@ function loadMonthPressChart(data){
 			enabled: true,
 			customizeText: function (label) {
 				var timestamp = new Date(this.argumentText);
-				return  this.valueText + '&#176C, ' + timestamp.getUTCDate() + "/" + (timestamp.getUTCMonth()+1) + "/" + timestamp.getUTCFullYear() ;
+				return  this.valueText + 'hPa, ' + timestamp.getUTCDate() + "/" + (timestamp.getUTCMonth()+1) + "/" + timestamp.getUTCFullYear() ;
 			}
 		}
 	});
@@ -465,6 +466,7 @@ function loadGauges(){
 
 $(function () {
 	var date = getDateCookie();
+	console.log("loadd "+date);
 	var today = loadDay(date);
 
 	loadTempChart(today);
