@@ -1,10 +1,8 @@
-/*
-* Converts an SQL format date to a javascript Date instance
-*/
+
 function toDate(date){
 	date = date.replace(/\s/g, "T");
 	date = date + "Z";
-	
+
 	return new Date(date);
 
 }
