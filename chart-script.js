@@ -468,7 +468,7 @@ $(document).ready(function() {
 	$(function () {
 		var date = getDateCookie();
 		var today = loadDay(date);
-		console.log(today);
+
 		loadTempChart(today);
 		loadHumChart(today);
 		loadPressChart(today);
