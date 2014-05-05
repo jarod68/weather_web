@@ -4,10 +4,8 @@
 function toDate(date){
 	date = date.replace(/\s/g, "T");
 	date = date + "Z";
-	console.log(date);
-	var result =  new Date(date);
-
-	return result;
+	
+	return new Date(date);
 
 }
 
