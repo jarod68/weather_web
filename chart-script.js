@@ -2,11 +2,13 @@
 * Converts an SQL format date to a javascript Date instance
 */
 function toDate(date){
-	date.replace(/\s/g, "T");
-	date = date + " UTC";
+	date = date.replace(/\s/g, "T");
+	date = date + "Z";
+	console.log(date);
 	var result =  new Date(date);
 
 	return result;
+
 }
 
 function computeDateForParameter(date){
@@ -23,7 +25,6 @@ function loadNow(){
 	var result = null;
 	$.ajax({
 		'async': false,
-		'global': false,
 		'url': "./now.php",
 		'dataType': "json",
 		'success': function (json) {
@@ -54,6 +55,7 @@ function loadDay(day){
 			var arr = [];
 			var lim = json.length;
 			for (var i = 0; i < lim; i++){
+
 				arr.push({timestamp : toDate(json[i].timestamp), outdoor_temperature: json[i].outdoor_temperature, indoor_temp: json[i].indoor_temp, indoor_humidity: json[i].indoor_humidity, indoor_pressure: json[i].indoor_pressure });
 			}
 			result = arr;
@@ -463,21 +465,28 @@ function loadGauges(){
 	loadNowPressGauge(now['indoor_pressure']);
 }
 
-$(function () {
-	var date = getDateCookie();
-	var today = loadDay(date);
 
-	loadTempChart(today);
-	loadHumChart(today);
-	loadPressChart(today);
+$(document).ready(function() {
 
-	var oneMonthAgo = getDateCookie();
-	oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
-	var month = loadMean(oneMonthAgo, date);
-	loadMonthTempChart(month);
-	loadMonthHumChart(month);
-	loadMonthPressChart(month);
 
-	loadGauges();
+	$(function () {
+		var date = getDateCookie();
+		var today = loadDay(date);
+		console.log(today);
+		loadTempChart(today);
+		loadHumChart(today);
+		loadPressChart(today);
+
+		var oneMonthAgo = getDateCookie();
+		oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
+		var month = loadMean(oneMonthAgo, date);
+		loadMonthTempChart(month);
+		loadMonthHumChart(month);
+		loadMonthPressChart(month);
+
+		loadGauges();
+
+	});
 
 });
+
