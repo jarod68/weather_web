@@ -2,7 +2,7 @@ function setDateCookie(date){
 
   var stringDate = date.getUTCFullYear()+"-"+ date.getMonth()+"-" + date.getDate();
 
-  $.cookie('selectedDay', stringDate);
+  $.cookie('selectedDay', stringDate, { expires: 0.0417 }); //valid for 1 hr
 }
 
 function getDateCookie(){
