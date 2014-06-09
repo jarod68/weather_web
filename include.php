@@ -16,7 +16,7 @@
   <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
   <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/13.2.8/js/dx.chartjs.js"></script>
   
-  <script type="text/javascript" src="./jquery.cookie.js"></script>
+  <script type="text/javascript" src="./js/jquery.cookie.js"></script>
 
-  <script type="text/javascript" src="index-script.js"></script>
-  <script type="text/javascript" src="chart-script.js"></script>
+  <script type="text/javascript" src="./js/index-script.js"></script>
+  <script type="text/javascript" src="./js/chart-script.js"></script>
