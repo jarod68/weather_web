@@ -1,6 +1,6 @@
 	<title>Weather station</title>
 
-	<link rel="stylesheet" href="style/default.css">
+	<link rel="stylesheet" href="css/default.css">
   <link rel="stylesheet" href="http:///code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   
   <!--bootstrap css -->
