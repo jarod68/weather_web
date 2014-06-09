@@ -18,7 +18,7 @@ if (isset($_GET["from"]) && isset($_GET["to"])){
 	$json = '[';
 
 	foreach ( $period as $dt ){
-		$day =  $dt->format("Y-m-j H:i:s");
+		$day =  $dt->format("Y-m-d H:i:s");
 
 		if($json != '[')
 			$json = $json . ', ';
