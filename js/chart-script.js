@@ -97,13 +97,13 @@ function loadTempChart(data){
 			valueType: "datetime"
 		},
 		series: [{
-			name: 'outdoor_temperature',
+			name: 'Outdoor temperature',
 			valueField: 'outdoor_temperature', 
 			point: {
 				size: '0.5'
 			}
 		},{
-			name: 'indoor_temperature',
+			name: 'Indooor temperature',
 			valueField: 'indoor_temp', 
 			point: {
 				size: '0.5'
@@ -149,7 +149,7 @@ function loadHumChart(data){
 			valueType: "datetime"
 		},
 		series: [{
-			name: 'indoor_humidity',
+			name: 'Indoor humidity',
 			valueField: 'indoor_humidity', 
 			color: '#3399FF',
 			point: {
@@ -196,7 +196,7 @@ function loadPressChart(data){
 			valueType: "datetime"
 		},
 		series: [{
-			name: 'indoor_pressure',
+			name: 'Indoor pressure',
 			valueField: 'indoor_pressure', 
 			color: 'orange', 
 			point: {
@@ -244,7 +244,7 @@ function loadMonthTempChart(data){
 		},
 
 		series: [{
-			name: 'outdoor_temperature_mean',
+			name: 'Outdoor temperature',
 			valueField: 'outdoor_temperature_mean',
 			type:'stackedBar'
 		}], 
@@ -281,7 +281,7 @@ function loadMonthHumChart(data){
 		},
 
 		series: [{
-			name: 'indoor_humidity_mean',
+			name: 'Indoor humidity',
 			valueField: 'indoor_humidity_mean',
 			type:'bar',
 			color: '#3399FF'
@@ -319,7 +319,7 @@ function loadMonthPressChart(data){
 		},
 
 		series: [{
-			name: 'indoor_pressure_mean',
+			name: 'Indoor pressure',
 			valueField: 'indoor_pressure_mean',
 			type:'bar',
 			color: 'orange'
