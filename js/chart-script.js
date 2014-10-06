@@ -62,13 +62,35 @@ function loadDay(day){
 
 }
 
-function loadMean(from, to){
+function loadMeanDay(from, to){ 
 
 	var result = null;
 	$.ajax({
 		'async': false,
 		'global': false,
-		'url': "./mean.php?from=" + computeDateForParameter(from)+ "&to="+computeDateForParameter(to),
+		'url': "./meanDay.php?from=" + computeDateForParameter(from)+ "&to="+computeDateForParameter(to) ,
+		'dataType': "json",
+		'success': function (json) {
+			var arr = [];
+			var lim = json.length;
+			for (var i = 0; i < lim; i++){
+				arr.push({day : toDate(json[i].day), indoor_temp_mean: json[i].indoor_temp_mean, indoor_humidity_mean: json[i].indoor_humidity_mean, indoor_pressure_mean: json[i].indoor_pressure_mean, outdoor_temperature_mean: json[i].outdoor_temperature_mean });
+
+			}
+			result = arr;
+		}
+	});
+	return result;
+
+}
+
+function loadYear(from, to){
+
+	var result = null;
+	$.ajax({
+		'async': false,
+		'global': false,
+		'url': "./meanYear.php?from=" + computeDateForParameter(from)+ "&to="+computeDateForParameter(to),
 		'dataType': "json",
 		'success': function (json) {
 			var arr = [];
@@ -230,7 +252,7 @@ function loadPressChart(data){
 }
 
 
-function loadMonthTempChart(data){
+function loadDayMeanTempChart(data){
 
 	$("#meanMonthTemp").dxChart({
 
@@ -267,7 +289,45 @@ function loadMonthTempChart(data){
 	});
 }
 
-function loadMonthHumChart(data){
+function loadYearTempChart(data){
+
+	$("#meanYearTemp").dxChart({
+
+		dataSource: data,
+		type: 'stackedBar',
+		commonSeriesSettings: {
+			argumentField: 'day'
+		},
+		scale: {
+			//valueType: "datetime"
+		},
+
+		series: [{
+			name: 'Outdoor temperature',
+			valueField: 'outdoor_temperature_mean',
+			type:'stackedBar'
+		}], 
+		argumentAxis: {
+			//argumentType: 'datetime',
+			label: {
+				format: 'MM'
+			},
+			axisDivisionFactor: 50,
+			grid: {
+				visible: true
+			}
+		},  tooltip: {
+			enabled: true,
+			customizeText: function (label) {
+				var timestamp = new Date(this.argumentText);
+				return  this.valueText + '&#176C, '  + (timestamp.getUTCMonth()+1) + " " + timestamp.getUTCFullYear() ;
+			}
+		}
+	});
+}
+
+
+function loadDayMeanHumChart(data){
 
 	$("#meanMonthHum").dxChart({
 
@@ -305,7 +365,7 @@ function loadMonthHumChart(data){
 	});
 }
 
-function loadMonthPressChart(data){
+function loadDayMeanPressChart(data){
 
 	$("#meanMonthPress").dxChart({
 
@@ -475,10 +535,18 @@ $(document).ready(function() {
 
 		var oneMonthAgo = getDateCookie();
 		oneMonthAgo.setDate(oneMonthAgo.getDate() - 31);
-		var month = loadMean(oneMonthAgo, date);
-		loadMonthTempChart(month);
-		loadMonthHumChart(month);
-		loadMonthPressChart(month);
+		var month = loadMeanDay(oneMonthAgo, date);
+		loadDayMeanTempChart(month);
+		loadDayMeanHumChart(month);
+		loadDayMeanPressChart(month);
+
+
+		var cookieDate = getDateCookie();
+		var oneYearAgo = new Date(cookieDate.getFullYear(), cookieDate.getMonth(), 1);
+		var endOfMonth = new Date(cookieDate.getFullYear(), cookieDate.getMonth() + 1, 0);
+		oneYearAgo.setDate(oneYearAgo.getDate() - 365);
+		var year = loadYear(oneYearAgo, endOfMonth);
+		loadYearTempChart(year);
 
 		loadGauges();
 

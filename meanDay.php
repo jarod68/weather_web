@@ -1,7 +1,6 @@
 <?php
 include_once "configured_weather_db.php";
 
-//$db = new weather_db(array('host' => 'localhost','user' => 'root','password' => 'raspberry','dbname' => 'weather'));
 $db = configured_weather_db::getInstance();
 
 if (isset($_GET["from"]) && isset($_GET["to"])){
