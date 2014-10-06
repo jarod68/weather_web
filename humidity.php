@@ -21,6 +21,10 @@
         <h3>Humidity month</h3>
         <div id="meanMonthHum" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
       </div>
+      <div class="row" id="yearHumidityContainer">
+      <h3>Humidity year mean</h3>
+      <div id="meanYearHum" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
+    </div>
     </div>
   </body>
   </html>

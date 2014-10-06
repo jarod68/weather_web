@@ -21,6 +21,10 @@
       <h3>Pressure month</h3>
       <div id="meanMonthPress" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
     </div>
+    <div class="row" id="yearPressureContainer">
+      <h3>Pressure year mean</h3>
+      <div id="meanYearPress" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
+    </div>
   </div>
 </body>
 </html>

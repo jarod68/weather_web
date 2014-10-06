@@ -38,10 +38,19 @@ $(function() {
       loadHumChart(day);
       loadPressChart(day);
 
-      var month = loadMean(oneMonthAgo, today);
-      loadMonthTempChart(month);
-      loadMonthHumChart(month);
-      loadMonthPressChart(month);
+      var month = loadMeanDay(oneMonthAgo, today);
+      loadDayMeanTempChart(month);
+      loadDayMeanHumChart(month);
+      loadDayMeanPressChart(month);
+
+
+      var oneYearAgo = new Date(today.getFullYear(), today.getMonth(), 1);
+      var endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      oneYearAgo.setDate(oneYearAgo.getDate() - 365);
+      var year = loadYear(oneYearAgo, endOfMonth);
+      loadYearTempChart(year);
+      loadYearPressChart(year);
+      loadYearHumChart(year);
 
       setDateCookie(today);
     }

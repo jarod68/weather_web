@@ -21,7 +21,7 @@
       <h3>Temperature month</h3>
       <div id="meanMonthTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
     </div>
-        <div class="row" id="yearTemperatureContainer">
+    <div class="row" id="yearTemperatureContainer">
       <h3>Temperature year mean</h3>
       <div id="meanYearTemp" style="max-width:800px;height: 300px;" class="col-md-8 jumbotron" ></div>
     </div>

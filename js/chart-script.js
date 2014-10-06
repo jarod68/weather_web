@@ -198,6 +198,36 @@ function loadHumChart(data){
 	});
 }
 
+function loadYearHumChart(data){
+
+	$("#meanYearHum").dxChart({
+
+		dataSource: data,
+		type: 'stackedBar',
+		commonSeriesSettings: {
+			argumentField: 'month'
+		},
+		series: [{
+			name: 'Indoor humidity',
+			valueField: 'indoor_humidity_mean',
+			type:'stackedBar',
+			color: '#3399FF'
+		}], 
+		argumentAxis: {
+			
+			axisDivisionFactor: 50,
+			grid: {
+				visible: true
+			}
+		},  tooltip: {
+			enabled: true,
+			customizeText: function (label) {
+				
+				return  this.valueText + '%, ' + this.argumentText ;
+			}
+		}
+	});
+}
 
 function loadPressChart(data){
 
@@ -303,6 +333,12 @@ function loadYearTempChart(data){
 			grid: {
 				visible: true
 			}
+		},  tooltip: {
+			enabled: true,
+			customizeText: function (label) {
+				
+				return  this.valueText + '&#176C, ' + this.argumentText ;
+			}
 		}
 	});
 }
@@ -379,6 +415,37 @@ function loadDayMeanPressChart(data){
 			customizeText: function (label) {
 				var timestamp = new Date(this.argumentText);
 				return  this.valueText + 'hPa, ' + timestamp.getUTCDate() + "/" + (timestamp.getUTCMonth()+1) + "/" + timestamp.getUTCFullYear() ;
+			}
+		}
+	});
+}
+
+function loadYearPressChart(data){
+
+	$("#meanYearPress").dxChart({
+
+		dataSource: data,
+		type: 'stackedBar',
+		commonSeriesSettings: {
+			argumentField: 'month'
+		},
+		series: [{
+			name: 'Indoor pressure',
+			valueField: 'indoor_pressure_mean',
+			type:'stackedBar',
+			color: 'orange'
+		}], 
+		argumentAxis: {
+			
+			axisDivisionFactor: 50,
+			grid: {
+				visible: true
+			}
+		},  tooltip: {
+			enabled: true,
+			customizeText: function (label) {
+				
+				return  this.valueText + 'hPa, ' + this.argumentText ;
 			}
 		}
 	});
@@ -528,7 +595,8 @@ $(document).ready(function() {
 		oneYearAgo.setDate(oneYearAgo.getDate() - 365);
 		var year = loadYear(oneYearAgo, endOfMonth);
 		loadYearTempChart(year);
-
+		loadYearPressChart(year);
+		loadYearHumChart(year);
 		loadGauges();
 
 	});
