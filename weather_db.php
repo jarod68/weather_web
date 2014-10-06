@@ -134,7 +134,6 @@ class weather_db{
 		$this->handleError();
 
 		$row = mysqli_fetch_array($result);
-		//jdmonthname(DateTime::createFromFormat("Y-m-d H:i:s", $arg_list['month'])->format('z') + 1, 1)
 		$toEncode = array('month' => DateTime::createFromFormat("Y-m-d H:i:s", $arg_list['month'])->format('M Y'),'indoor_temp_mean' => (double)$row['indoor_temp_mean'], 'indoor_humidity_mean' => (double)$row['indoor_humidity_mean'], 'indoor_pressure_mean' => (double)$row['indoor_pressure_mean'], 'outdoor_temperature_mean' => (double)$row['outdoor_temperature_mean']);
 
 		$this->close();

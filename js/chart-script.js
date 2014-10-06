@@ -93,12 +93,6 @@ function loadYear(from, to){
 		'url': "./meanMonth.php?from=" + computeDateForParameter(from)+ "&to="+computeDateForParameter(to),
 		'dataType': "json",
 		'success': function (json) {
-			/*var arr = [];
-			var lim = json.length;
-			for (var i = 0; i < lim; i++){
-				arr.push({month : toDate(json[i].month), indoor_temp_mean: json[i].indoor_temp_mean, indoor_humidity_mean: json[i].indoor_humidity_mean, indoor_pressure_mean: json[i].indoor_pressure_mean, outdoor_temperature_mean: json[i].outdoor_temperature_mean });
-
-			}*/
 			result = json;
 		}
 	});
