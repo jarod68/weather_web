@@ -90,16 +90,16 @@ function loadYear(from, to){
 	$.ajax({
 		'async': false,
 		'global': false,
-		'url': "./meanYear.php?from=" + computeDateForParameter(from)+ "&to="+computeDateForParameter(to),
+		'url': "./meanMonth.php?from=" + computeDateForParameter(from)+ "&to="+computeDateForParameter(to),
 		'dataType': "json",
 		'success': function (json) {
-			var arr = [];
+			/*var arr = [];
 			var lim = json.length;
 			for (var i = 0; i < lim; i++){
-				arr.push({day : toDate(json[i].day), indoor_temp_mean: json[i].indoor_temp_mean, indoor_humidity_mean: json[i].indoor_humidity_mean, indoor_pressure_mean: json[i].indoor_pressure_mean, outdoor_temperature_mean: json[i].outdoor_temperature_mean });
+				arr.push({month : toDate(json[i].month), indoor_temp_mean: json[i].indoor_temp_mean, indoor_humidity_mean: json[i].indoor_humidity_mean, indoor_pressure_mean: json[i].indoor_pressure_mean, outdoor_temperature_mean: json[i].outdoor_temperature_mean });
 
-			}
-			result = arr;
+			}*/
+			result = json;
 		}
 	});
 	return result;
@@ -296,31 +296,18 @@ function loadYearTempChart(data){
 		dataSource: data,
 		type: 'stackedBar',
 		commonSeriesSettings: {
-			argumentField: 'day'
+			argumentField: 'month'
 		},
-		scale: {
-			//valueType: "datetime"
-		},
-
 		series: [{
 			name: 'Outdoor temperature',
 			valueField: 'outdoor_temperature_mean',
 			type:'stackedBar'
 		}], 
 		argumentAxis: {
-			//argumentType: 'datetime',
-			label: {
-				format: 'MM'
-			},
+			
 			axisDivisionFactor: 50,
 			grid: {
 				visible: true
-			}
-		},  tooltip: {
-			enabled: true,
-			customizeText: function (label) {
-				var timestamp = new Date(this.argumentText);
-				return  this.valueText + '&#176C, '  + (timestamp.getUTCMonth()+1) + " " + timestamp.getUTCFullYear() ;
 			}
 		}
 	});

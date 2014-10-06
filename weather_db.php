@@ -91,7 +91,7 @@ class weather_db{
 		return $json;
 	}
 
-	public function computeMeans (){
+	public function computeMeansDay (){
 
 
 		$arg_list = func_get_args()[0];
@@ -116,6 +116,33 @@ class weather_db{
 		
 		return $json;
 	}
+
+	public function computeMeansMonth (){
+
+
+		$arg_list = func_get_args()[0];
+		
+
+
+		if(!isset($arg_list['month'])) die();
+		
+				$request = 'SELECT ROUND(AVG( indoor_temp ),2) AS indoor_temp_mean, ROUND(AVG( indoor_humidity ),2) AS indoor_humidity_mean, ROUND(AVG( indoor_pressure ),2) AS indoor_pressure_mean, ROUND(AVG( outdoor_temperature ),2) AS outdoor_temperature_mean
+		FROM record  WHERE MONTH(timestamp) = MONTH("' . $arg_list['month'] .'") AND YEAR(timestamp) = YEAR("' . $arg_list['month'] .'")';
+
+		$this->connect();
+		$result = $this->link->query($request);
+		$this->handleError();
+
+		$row = mysqli_fetch_array($result);
+		//jdmonthname(DateTime::createFromFormat("Y-m-d H:i:s", $arg_list['month'])->format('z') + 1, 1)
+		$toEncode = array('month' => DateTime::createFromFormat("Y-m-d H:i:s", $arg_list['month'])->format('M Y'),'indoor_temp_mean' => (double)$row['indoor_temp_mean'], 'indoor_humidity_mean' => (double)$row['indoor_humidity_mean'], 'indoor_pressure_mean' => (double)$row['indoor_pressure_mean'], 'outdoor_temperature_mean' => (double)$row['outdoor_temperature_mean']);
+
+		$this->close();
+		$json = json_encode($toEncode);
+		
+		return $json;
+	}
+
 	public function lastValues (){
 
 		$request = 'SELECT id, indoor_temp, indoor_humidity, indoor_pressure, outdoor_temperature, timestamp FROM record WHERE id=(SELECT id FROM record ORDER BY id DESC LIMIT 1)';
